@@ -1,0 +1,4 @@
+hive (testdb)> insert overwrite local directory '/home/hadooptrainingiit/workspace/satish/hivelab/new.csv' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','select * from dept;
+
+
+hive (testdb)> insert overwrite directory '/user/hadooptrainingiit/satish/hivelab/output.csv' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','select * from dept;
