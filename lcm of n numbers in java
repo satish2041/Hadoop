@@ -1,0 +1,35 @@
+package wordcount;
+
+import java.util.Scanner;
+
+public class LcmOfNumbers {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sr=new Scanner(System.in); 
+		System.out.println("enter number of numbers");
+		int num=sr.nextInt();
+	int a[]=new int[num];
+  
+		System.out.println("enter numbers");
+		for(int i=0;i<num;i++){
+			a[i]=sr.nextInt();
+		}
+int total=1;
+for(int k=0;k<num;k++){
+	total=lcm(a[k],total);
+}
+System.out.println(total);
+	}
+	public static int lcm(int b,int c){
+		int z=0;
+		for(int i=1;i<=c;i++){
+			z=i*b;
+			if(z%c==0){
+				break;
+			}
+		}
+		return z;
+	}
+
+}
