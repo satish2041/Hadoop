@@ -1,0 +1,11 @@
+how to kill the job in Hadoop ?
+old version:
+hadoop job -kill job_id
+
+new version:
+
+yarn application -kill application_id
+
+find the no of jobs are running?
+
+ANS: yarn application -list
