@@ -1,0 +1,29 @@
+
+sqoop list-databases --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba  --password itversity
+
+sqoop list-tables --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba  --password itversity
+
+sqoop import-all-tables --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba  --password itversity --warehouse-d
+ir  "/user/hadooptrainingiit/satish/inputs" -m 1
+
+sqoop import --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba --delete-target-dir --password itversity --m 1 --query 'select orders.orde
+r_id,customers.customer_fname from orders join customers on (orders.order_customer_id = customers.customer_id) where $CONDITIONS' --hive-home /apps/hive/warehouse
+--hive-import --hive-overwrite --hive-table sqoop_import.ordered2 --target-dir /user/hadooptrainingiit/order_customer2
+
+sqoop import --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba --password itversity --table customers --hive-
+import --create-hive-table --hive-table testdb.customers2
+
+sqoop import --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba --password itversity --table customers --hive-
+home /apps/hive/warehouse --fields-terminated-by "," --hive-import --create-hive-table  --hive-table testdb.customers5 --delete-target-dir
+
+sqoop import --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba --password itversity --table customers --wareh
+ouse-dir '/user/hadooptrainingiit/satish/outputs' --fields-terminated-by "," --hive-import --create-hive-table  --hive-overwrite --hive-table testdb.customers
+
+sqoop import --connect "jdbc:mysql://nn01.itversity.com/retail_db" --username retail_dba --password itversity --table customers  --hive
+-import --create-hive-table  --hive-overwrite --hive-table testdb.customers13  --target-dir '/user/hadooptrainingiit/satish/sqoop' --fields-terminated-by ','
+
+sqoop export --connect "jdbc:mysql://nn01.itversity.com/retail_export" --username retail_dba --password itversity --table satish --expo
+rt-dir '/user/hadooptrainingiit/satish/outputs/customers'
+
+sqoop export --connect "jdbc:mysql://nn01.itversity.com/retail_export" --username retail_dba  --password itversity --table satish  --ex
+port-dir 'hdfs://nn01.itversity.com:8020/apps/hive/warehouse/testdb.db/customers5'
